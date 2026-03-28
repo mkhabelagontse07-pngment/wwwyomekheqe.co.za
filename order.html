@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Order | YOME KWEQE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial;
+  background:#111;
+  color:white;
+  text-align:center;
+}
+
+form {
+  margin-top:40px;
+}
+
+input, select {
+  padding:12px;
+  margin:10px;
+  width:250px;
+  border:none;
+  border-radius:5px;
+}
+
+button {
+  padding:12px 25px;
+  background:gold;
+  border:none;
+  cursor:pointer;
+}
+
+.instructions {
+  max-width:600px;
+  margin:auto;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Place Your Order</h1>
+
+<div class="instructions">
+<p>🛒 How to order:</p>
+<p>1. Fill in your details</p>
+<p>2. Click submit</p>
+<p>3. Your order will open in SMS & WhatsApp</p>
+</div>
+
+<form onsubmit="sendOrder(event)">
+<input type="text" id="name" placeholder="Your Name" required><br>
+<input type="text" id="product" placeholder="Product Name" required><br>
+<select id="size">
+<option>Size</option>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+</select><br>
+<input type="text" id="address" placeholder="Address" required><br>
+
+<button>Submit Order</button>
+</form>
+
+<script>
+function sendOrder(e){
+e.preventDefault();
+
+let name=document.getElementById("name").value;
+let product=document.getElementById("product").value;
+let size=document.getElementById("size").value;
+let address=document.getElementById("address").value;
+
+let message = `YOME KWEQE ORDER:
+Name: ${name}
+Product: ${product}
+Size: ${size}
+Address: ${address}`;
+
+// SMS
+window.location.href = `sms:0794197003?body=${encodeURIComponent(message)}`;
+
+// WhatsApp
+setTimeout(()=>{
+window.open(`https://wa.me/27794197003?text=${encodeURIComponent(message)}`);
+},1000);
+}
+</script>
+
+</body>
+</html>
